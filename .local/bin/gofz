@@ -1,0 +1,3 @@
+#!/bin/sh
+folder=$(tree -fid | dmenu -i -l 20 -p "folder")
+[ ! -z $folder ] && st -e $SHELL -c "cd $folder;$SHELL" &  > /dev/null  

@@ -1,0 +1,10 @@
+#!/bin/sh
+choice=$(printf "202\\n204\\n210\\n211\\n212\\nHCI\\nSD\\nGP\\nOS\\nAP" | dmenu -i -p "Module?")
+[ ! -z $choice ] && notify-send "opening $choice"
+case "$choice" in
+    202|HCI) st -e $SHELL -c 'lynx -nopause -cmd_script=/home/dex/.lynx/moodle.lys -accept_all_cookies "$LHCI"';;
+    204|SD)  st -e $SHELL -c 'lynx -nopause -cmd_script=/home/dex/.lynx/moodle.lys -accept_all_cookies "$LSOFT"';;
+    210|GP)  st -e $SHELL -c 'lynx -nopause -cmd_script=/home/dex/.lynx/moodle.lys -accept_all_cookies "$LGROUP"';;
+    211|OS)  st -e $SHELL -c 'lynx -nopause -cmd_script=/home/dex/.lynx/moodle.lys -accept_all_cookies "$LOS"';;
+    212|AP)  st -e $SHELL -c 'lynx -nopause -cmd_script=/home/dex/.lynx/moodle.lys -accept_all_cookies "$LADV"';;
+esac

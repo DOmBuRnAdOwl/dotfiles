@@ -1,0 +1,6 @@
+#! /bin/sh
+if [ $# -eq 0 ]; then
+  echo "file name"
+else
+  /usr/local/MATLAB/R2023b/bin/matlab -nosplash -nodesktop -r "run('$1');"
+fi

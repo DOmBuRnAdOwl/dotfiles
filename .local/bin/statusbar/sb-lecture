@@ -1,0 +1,2 @@
+#!/bin/zsh
+echo -n "$(calcurse -n | tail -1 | grep -o '[^\t ].*')";calcurse -a --format-apt "[%r]%m\n %N \n" | grep  -A 3 -F -f <(calcurse -n | grep -o "SCC.*") | grep -Po " -\s\K.*"

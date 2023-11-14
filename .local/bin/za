@@ -1,0 +1,12 @@
+#!/bin/sh
+if [ -z "$*" ]; then exit 1; fi
+if [[ $@ == *.pdf ]]
+then
+  echo "already pdf"
+elif [[ $@ == *.md ]]
+then
+  pandoc --from=gfm --to=pdf "$1" -o "$(echo "$1" | cut -d'.' -f1)"".pdf" --pdf-engine=wkhtmltopdf
+else
+  libreoffice --convert-to pdf "$1" --headless
+fi
+zathura "$(echo "$1" | cut -d'.' -f1)"".pdf"

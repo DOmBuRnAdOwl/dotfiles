@@ -1,0 +1,22 @@
+#!/bin/sh
+choice=$((basename -a ~/lecture-notes/*/ | grep -P ".*[0-9]{3}" | cut -d "-" -f 1; echo -e "library\ngithub\noutlook\nproton") |  paste -sd "\\n" - | dmenu -n -r -i -p "Module?") || exit 
+notify-send "opening"
+case $choice in
+  "github") link="github.com/login?login=DOmBuRnAdOwl" ;otp "github"&;;
+  "outlook") link="http://office365.lancs.ac.uk/";echo "latchamd" | xclip -sel clip ;otp "Office365"&;;
+  "proton") link="https://account.proton.me/login";;
+  "library") link="https://onesearch.lancaster-university.uk/";;
+  *) link=$(cat ~/lecture-notes/${choice}*/.link 2> /dev/null) ; echo "latchamd" | xclip -sel clip;
+esac
+[ -z "${link}" ] && notify-send "link not found" || librewolf --new-window "$link" > /dev/null
+
+
+
+# # choice=$((basename -a ~/lecture-notes/*/ | cut -c 2-; echo -e "github\noutlook") |  paste -sd "\\n" - | dmenu -r -i -p  "Module?") || exit 
+# choice=$((basename -a ~/lecture-notes/*/ | cut -c 2-; echo -e "github\noutlook") |  paste -sd "\\n" - | dmenu -r -i -p  "Module?" -hp 03,11,12) || exit 
+# case $choice in
+#   "github") link="github.com/login?login=DOmBuRnAdOwl" ;;
+#   "outlook") link="https://weblogin.lancs.ac.uk/login/?factors=LANCS.LOCAL&cosign-https-idp-o365-lu-0.lancs.ac.uk&https://idp-o365-lu.lancaster.ac.uk/idp/Authn/RemoteUser?conversation=e1s1";echo "latchamd" | xclip -sel clip ;otp &;;
+#   *) link=$(cat ~/lecture-notes/2${choice}/.link 2> /dev/null) ; echo "latchamd" | xclip -sel clip;
+# esac
+# [ -z "${link}" ] && notify-send "link not found" || librewolf --new-window "$link" > /dev/null

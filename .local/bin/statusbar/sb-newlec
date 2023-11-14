@@ -1,0 +1,13 @@
+#!/bin/zsh
+#echo -n "$(calcurse -n | tail -1 | grep -o '[^\t ].*/')";calcurse -a --format-apt "[%r]%m\n %N \n" | grep  -A 3 -F -f <(calcurse -n | grep -o "SCC.*") | grep -Po " -\s\K.*"
+
+#echo -n "$(calcurse -n | awk 'NR==2 {printf $1; split($2,a,"\\");print a[1]}')"; calcurse -a --format-apt "[%r]%m\n %N \n" | grep  -A 3 -F -f <(calcurse -n | grep -o "SCC.*") | grep -Po " -\s\K.*"
+
+calcurse -n | pee "tail -1 | grep -o '[^\t ].*/' " 'grep -o "SCC.*" | xargs -I {} zsh -c "calcurse -a --format-apt \"[\\%r]%m\\n %N \\\n \\ \" | grep -A 3 {} | grep -Po \" -\\s\\K.*\""'
+
+#calcurse -n | pee "awk 'NR==2 {printf \$1; split(\$2,a,\"/\");print a[1],a[2]}'| tr -d '\n'" 'grep -o "SCC.*" | xargs -I {} zsh -c "calcurse -a --format-apt \"[\\%r]%m\\n %N \\\n \\ \" | grep -A 3 {} | grep -Po \" -\\s\\K.*\""'
+
+#calcurse -n | grep -o "SCC.*" | xargs -I {} sh -c "calcurse -a --format-apt \"[\\%r]%m\\n %N \\\n \\ \" | grep {}"
+#"grep -o \"SCC.\*\" \| xargs -I \{\} sh -c \"calcurse -a --format-apt \'\[\\%r\]%m\\n %N \\\\n \\\' \| grep \{\}\"\n"
+
+#calcurse -n | grep -o "SCC.*" | xargs -I {} sh -c "calcurse -a --format-apt '[\%r]%m\n %N \\n \' | grep {}"

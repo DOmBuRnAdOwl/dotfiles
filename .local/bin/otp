@@ -1,0 +1,13 @@
+# !/bin/sh
+# type_otp(){
+#   [ "$(xdotool getactivewindow getwindowclassname)" == "librewolf-default" ] && xdotool search --classname "librewolf-default" type $(xclip -sel clip -o);
+# }
+if [ $# -eq 0 ]; then
+  rec="Office365"
+else
+  rec="$1"
+fi
+
+for i in $(seq 1 3); do 
+  dmenu -P | keepassxc-cli clip -t ~/.local/keepass/changes.kdbx "$rec" &> /dev/null && exit || notify-send "try again";
+done

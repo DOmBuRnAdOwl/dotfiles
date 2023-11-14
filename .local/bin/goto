@@ -1,0 +1,15 @@
+#!/bin/sh
+choice=$(basename -a ~/lecture-notes/*/ | grep -P ".*[0-9]{3}" | cut -d "-" -f 1| paste -sd "\\n" - | dmenu -n -r -i -p "Module?") || exit
+if ls /home/dex/lecture-notes/${choice}*/default;then
+  st -e $SHELL -c "cd -P /home/dex/lecture-notes/${choice}*/default;$SHELL" &  > /dev/null
+else
+  st -e $SHELL -c "cd /home/dex/lecture-notes/${choice}*/;$SHELL" &  > /dev/null
+fi
+# st -e $SHELL -c "cd /home/dex/lecture-notes/${choice}*/;$SHELL" &  > /dev/null
+# #!/bin/sh
+# choice=$(basename -a ~/lecture-notes/*/ | cut -c 2- | paste -sd "\\n" - | dmenu -r -i -p  "Module?" -hp 03,11,12) || exit
+# if [ -e "/home/dex/lecture-notes/2${choice}/revision/" ]; then
+#   st -e $SHELL -c "cd /home/dex/lecture-notes/2${choice}/revision/;$SHELL" &  > /dev/null
+# else
+#   st -e $SHELL -c "cd /home/dex/lecture-notes/2${choice}/;$SHELL" &  > /dev/null
+# fi
