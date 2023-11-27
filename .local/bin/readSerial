@@ -1,0 +1,10 @@
+#! /bin/sh
+sudo pkill screen
+for f in $(ls /dev/tty*); do
+  res=$(udevadm info -q all -a -n "$f" | grep micro)
+  if [ "$res" ]; then
+    port=$f
+    echo "$f"
+  fi
+done
+sudo screen "$port" 115200

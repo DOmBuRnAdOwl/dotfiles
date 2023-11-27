@@ -9,4 +9,6 @@ then
 else
   libreoffice --convert-to pdf "$1" --headless
 fi
-zathura "$(echo "$1" | cut -d'.' -f1)"".pdf"
+zathura "${1%.*}"".pdf"
+# zathura "$(basename "$1" .pdf)"".pdf"
+# zathura "$(echo "$1" | cut -d'.' -f1)"".pdf"

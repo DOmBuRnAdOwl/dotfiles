@@ -1,21 +1,31 @@
 #! /bin/python
 import requests,json,sys,os
-
 query=""
+temp=None
+if sys.argv[1]=="-t" and sys.argv[2].isnumeric():
+    temp = int(sys.argv[2])
+    query=" ".join(sys.argv[3:])+"\n"
+else:
+    query=" ".join(sys.argv[1:])+"\n"
 if not sys.stdin.isatty():
-    query = sys.stdin.read()
-if len(sys.argv) >1:
-    query = " ".join(sys.argv[1:]) + "\n" + query
+    query = sys.stdin.read() + query
 
 message =[{'role': 'user', 'content': query}]
 
+# data = {
+#     "messages": message,
+#     "model": "gpt-3.5-turbo-1106",
+#     "temperature": 0.2,
+#     "top_p": 1,
+#     "stream": True
+# }
 data = {
     "messages": message,
-    "model": "gpt-3.5-turbo",
-    "temperature": 0.3,
-    "top_p": 1,
+    "model": "gpt-3.5-turbo-1106",
     "stream": True
 }
+if temp:
+    data["temperature"]=0.2
 response = requests.post(
   "https://api.openai.com/v1/chat/completions",
   headers = {
